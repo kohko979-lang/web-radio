@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MarketPlaceKu</title>
+
+<style>
+:root{
+    --orange:#ee4d2d;
+    --orange2:#ff733f;
+    --bg:#f5f5f5;
+    --text:#222;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+}
+
+header{
+    background:linear-gradient(120deg,var(--orange),var(--orange2));
+    color:white;
+    padding:12px 0 20px;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.topbar{
+    width:min(1200px,95%);
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    font-size:12px;
+    margin-bottom:15px;
+}
+
+.nav{
+    width:min(1200px,95%);
+    margin:auto;
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+.search{
+    flex:1;
+    position:relative;
+}
+
+.search input{
+    width:100%;
+    border:none;
+    outline:none;
+    padding:14px 50px 14px 15px;
+    border-radius:8px;
+    font-size:14px;
+}
+
+.search button{
+    position:absolute;
+    right:5px;
+    top:5px;
+    bottom:5px;
+    width:42px;
+    border:none;
+    background:var(--orange);
+    color:white;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.cart{
+    font-size:28px;
+    position:relative;
+    cursor:pointer;
+}
+
+.cart span{
+    position:absolute;
+    top:-8px;
+    right:-10px;
+    background:white;
+    color:var(--orange);
+    font-size:11px;
+    border-radius:50%;
+    width:20px;
+    height:20px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:bold;
+}
+
+.container{
+    width:min(1200px,95%);
+    margin:20px auto;
+}
+
+.hero{
+    height:240px;
+    border-radius:16px;
+    background:linear-gradient(120deg,#ff8b6b,#ee4d2d);
+    color:white;
+    display:flex;
+    align-items:center;
+    padding:40px;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+.hero p{
+    font-size:18px;
+}
+
+.hero button{
+    margin-top:18px;
+    padding:12px 22px;
+    border:none;
+    border-radius:8px;
+    background:white;
+    color:var(--orange);
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.section{
+    background:white;
+    border-radius:12px;
+    padding:20px;
+    margin-bottom:20px;
+}
+
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.section-title h2{
+    font-size:20px;
+}
+
+.categories{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+    gap:15px;
+}
+
+.category{
+    text-align:center;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.category:hover{
+    transform:translateY(-3px);
+}
+
+.cat-icon{
+    width:65px;
+    height:65px;
+    margin:auto;
+    border-radius:50%;
+    background:#fff0ea;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:30px;
+    margin-bottom:8px;
+}
+
+.category p{
+    font-size:12px;
+}
+
+.admin-btn{
+    background:var(--orange);
+    color:white;
+    border:none;
+    padding:12px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.filter{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+}
+
+.filter button{
+    padding:8px 15px;
+    border-radius:20px;
+    border:1px solid #ddd;
+    background:white;
+    cursor:pointer;
+}
+
+.filter button.active{
+    background:var(--orange);
+    color:white;
+    border-color:var(--orange);
+}
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+    gap:16px;
+}
+
+.product{
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    transition:.2s;
+}
+
+.product:hover{
+    transform:translateY(-4px);
+}
+
+.product img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+    background:#eee;
+}
+
+.product-info{
+    padding:12px;
+}
+
+.product-name{
+    font-size:14px;
+    height:40px;
+    overflow:hidden;
+}
+
+.price{
+    color:var(--orange);
+    font-size:18px;
+    font-weight:bold;
+    margin-top:8px;
+}
+
+.stock{
+    color:#777;
+    font-size:12px;
+    margin-top:5px;
+}
+
+.badge{
+    display:inline-block;
+    margin-top:8px;
+    background:#fff0ea;
+    color:var(--orange);
+    padding:4px 7px;
+    border-radius:5px;
+    font-size:11px;
+}
+
+.actions{
+    display:flex;
+    gap:8px;
+    margin-top:10px;
+}
+
+.actions button{
+    flex:1;
+    border:none;
+    padding:8px;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:12px;
+}
+
+.buy{
+    background:var(--orange);
+    color:white;
+}
+
+.edit{
+    background:#ffc107;
+    color:white;
+}
+
+.delete{
+    background:#e53935;
+    color:white;
+}
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
+
+.modal-box{
+    width:min(500px,92%);
+    background:white;
+    border-radius:15px;
+    padding:25px;
+    max-height:90vh;
+    overflow:auto;
+}
+
+.modal-box h2{
+    margin-bottom:15px;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:6px;
+    font-size:14px;
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+    padding:11px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    outline:none;
+}
+
+.preview{
+    width:100%;
+    height:180px;
+    border:2px dashed #ddd;
+    border-radius:10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    margin-bottom:10px;
+}
+
+.preview img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.modal-buttons{
+    display:flex;
+    gap:10px;
+    margin-top:10px;
+}
+
+.save{
+    flex:1;
+    background:var(--orange);
+    color:white;
+    border:none;
+    padding:12px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.cancel{
+    flex:1;
+    background:#ddd;
+    border:none;
+    padding:12px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.cart-panel{
+    position:fixed;
+    right:0;
+    top:0;
+    width:350px;
+    max-width:100%;
+    height:100%;
+    background:white;
+    box-shadow:-3px 0 15px rgba(0,0,0,.2);
+    transform:translateX(100%);
+    transition:.3s;
+    z-index:1000;
+    display:flex;
+    flex-direction:column;
+}
+
+.cart-panel.show{
+    transform:translateX(0);
+}
+
+.cart-header{
+    padding:18px;
+    background:var(--orange);
+    color:white;
+    display:flex;
+    justify-content:space-between;
+}
+
+.cart-items{
+    flex:1;
+    overflow:auto;
+    padding:15px;
+}
+
+.cart-item{
+    display:flex;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.cart-item img{
+    width:60px;
+    height:60px;
+    object-fit:cover;
+    border-radius:8px;
+}
+
+.cart-footer{
+    border-top:1px solid #ddd;
+    padding:15px;
+}
+
+.total{
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.checkout{
+    width:100%;
+    padding:12px;
+    border:none;
+    background:var(--orange);
+    color:white;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.empty{
+    text-align:center;
+    color:#999;
+    padding:30px;
+}
+
+footer{
+    background:#222;
+    color:white;
+    margin-top:30px;
+    padding:35px;
+    text-align:center;
+}
+
+@media(max-width:600px){
+
+.hero{
+    height:180px;
+    padding:25px;
+}
+
+.hero h1{
+    font-size:28px;
+}
+
+.nav{
+    flex-wrap:wrap;
+}
+
+.logo{
+    font-size:24px;
+}
+
+.search{
+    order:3;
+    width:100%;
+    flex-basis:100%;
+}
+
+.topbar{
+    display:none;
+}
+
+.products{
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+}
+
+.product img{
+    height:140px;
+}
+
+.cart-panel{
+    width:100%;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="topbar">
+<div>Gratis Ongkir • Marketplace Indonesia</div>
+<div>Login | Daftar</div>
+</div>
+
+<div class="nav">
+
+<div class="logo">🛍 MarketKu</div>
+
+<div class="search">
+<input type="text" id="searchInput" placeholder="Cari barang..." oninput="renderProducts()">
+<button>🔍</button>
+</div>
+
+<div class="cart" onclick="openCart()">
+🛒
+<span id="cartCount">0</span>
+</div>
+
+</div>
+</header>
+
+<div class="container">
+
+<div class="hero">
+<div>
+<h1>Marketplace Modern</h1>
+<p>Jual dan tampilkan produkmu sendiri dengan mudah.</p>
+<button onclick="openModal()">+ Tambah Produk</button>
+</div>
+</div>
+
+<div class="section">
+
+<div class="section-title">
+<h2>Kategori</h2>
+<button class="admin-btn" onclick="openModal()">Tambah Barang</button>
+</div>
+
+<div class="categories">
+
+<div class="category" onclick="filterCategory('Semua')">
+<div class="cat-icon">🛒</div>
+<p>Semua</p>
+</div>
+
+<div class="category" onclick="filterCategory('Elektronik')">
+<div class="cat-icon">📱</div>
+<p>Elektronik</p>
+</div>
+
+<div class="category" onclick="filterCategory('Fashion')">
+<div class="cat-icon">👕</div>
+<p>Fashion</p>
+</div>
+
+<div class="category" onclick="filterCategory('Makanan')">
+<div class="cat-icon">🍔</div>
+<p>Makanan</p>
+</div>
+
+<div class="category" onclick="filterCategory('Rumah')">
+<div class="cat-icon">🏠</div>
+<p>Rumah</p>
+</div>
+
+<div class="category" onclick="filterCategory('Otomotif')">
+<div class="cat-icon">🚗</div>
+<p>Otomotif</p>
+</div>
+
+<div class="category" onclick="filterCategory('Lainnya')">
+<div class="cat-icon">📦</div>
+<p>Lainnya</p>
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<div class="section-title">
+<h2>Produk</h2>
+<span id="jumlahProduk"></span>
+</div>
+
+<div class="filter" id="filter"></div>
+
+<div class="products" id="productList"></div>
+
+</div>
+
+</div>
+
+<div class="modal" id="modal">
+
+<div class="modal-box">
+
+<h2 id="modalTitle">Tambah Produk</h2>
+
+<div class="form-group">
+<label>Gambar Produk</label>
+<div class="preview" id="preview">
+<span>Pilih gambar JPG / PNG</span>
+</div>
+<input type="file" id="imageInput" accept="image/*">
+</div>
+
+<div class="form-group">
+<label>Nama Barang</label>
+<input type="text" id="nameInput" placeholder="Contoh: Sepatu Nike">
+</div>
+
+<div class="form-group">
+<label>Harga</label>
+<input type="number" id="priceInput" placeholder="50000">
+</div>
+
+<div class="form-group">
+<label>Stok</label>
+<input type="number" id="stockInput" placeholder="10">
+</div>
+
+<div class="form-group">
+<label>Kategori</label>
+
+<select id="categoryInput">
+
+<option>Elektronik</option>
+<option>Fashion</option>
+<option>Makanan</option>
+<option>Rumah</option>
+<option>Otomotif</option>
+<option>Lainnya</option>
+
+</select>
+
+</div>
+
+<div class="modal-buttons">
+
+<button class="cancel" onclick="closeModal()">Batal</button>
+
+<button class="save" onclick="saveProduct()">Simpan Produk</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="cart-panel" id="cartPanel">
+
+<div class="cart-header">
+
+<h2>Keranjang</h2>
+
+<button onclick="closeCart()" style="background:none;border:none;color:white;font-size:20px">✕</button>
+
+</div>
+
+<div class="cart-items" id="cartItems"></div>
+
+<div class="cart-footer">
+
+<div class="total" id="totalPrice">Total: Rp0</div>
+
+<button class="checkout" onclick="checkout()">Checkout</button>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 MarketKu Marketplace
+</footer>
+
+<script>
+
+let products = JSON.parse(localStorage.getItem("products")) || [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+let selectedImage="";
+let editId=null;
+let currentCategory="Semua";
+
+const categories=["Semua","Elektronik","Fashion","Makanan","Rumah","Otomotif","Lainnya"];
+
+function saveStorage(){
+localStorage.setItem("products",JSON.stringify(products));
+localStorage.setItem("cart",JSON.stringify(cart));
+}
+
+function rupiah(n){
+return new Intl.NumberFormat("id-ID",{
+style:"currency",
+currency:"IDR",
+maximumFractionDigits:0
+}).format(n);
+}
+
+function renderFilter(){
+
+let html="";
+
+categories.forEach(cat=>{
+
+html+=`<button class="${cat===currentCategory?"active":""}" onclick="filterCategory('${cat}')">${cat}</button>`;
+
+});
+
+document.getElementById("filter").innerHTML=html;
+
+}
+
+function filterCategory(cat){
+
+currentCategory=cat;
+renderFilter();
+renderProducts();
+
+}
+
+function renderProducts(){
+
+const search=document.getElementById("searchInput").value.toLowerCase();
+
+let filtered=products.filter(p=>{
+
+let cocokNama=p.name.toLowerCase().includes(search);
+
+let cocokKategori=currentCategory==="Semua" || p.category===currentCategory;
+
+return cocokNama && cocokKategori;
+
+});
+
+document.getElementById("jumlahProduk").innerText=filtered.length+" Produk";
+
+let html="";
+
+if(filtered.length===0){
+
+html='<div class="empty">Belum ada produk.</div>';
+
+}else{
+
+filtered.forEach(p=>{
+
+html+=`
+
+<div class="product">
+
+<img src="${p.image}">
+
+<div class="product-info">
+
+<div class="product-name">${p.name}</div>
+
+<div class="price">${rupiah(p.price)}</div>
+
+<div class="stock">Stok : ${p.stock}</div>
+
+<div class="badge">${p.category}</div>
+
+<div class="actions">
+
+<button class="buy" onclick="addCart('${p.id}')">🛒 Beli</button>
+
+<button class="edit" onclick="editProduct('${p.id}')">Edit</button>
+
+<button class="delete" onclick="deleteProduct('${p.id}')">Hapus</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+document.getElementById("productList").innerHTML=html;
+
+renderFilter();
+
+}
+
+document.getElementById("imageInput").addEventListener("change",function(){
+
+const file=this.files[0];
+
+if(!file)return;
+
+const reader=new FileReader();
+
+reader.onload=function(e){
+
+selectedImage=e.target.result;
+
+document.getElementById("preview").innerHTML=`<img src="${selectedImage}">`;
+
+}
+
+reader.readAsDataURL(file);
+
+});
+
+function openModal(){
+
+editId=null;
+
+document.getElementById("modalTitle").innerText="Tambah Produk";
+
+document.getElementById("nameInput").value="";
+document.getElementById("priceInput").value="";
+document.getElementById("stockInput").value="";
+document.getElementById("categoryInput").value="Elektronik";
+document.getElementById("imageInput").value="";
+document.getElementById("preview").innerHTML="<span>Pilih gambar JPG / PNG</span>";
+
+selectedImage="";
+
+document.getElementById("modal").style.display="flex";
+
+}
+
+function closeModal(){
+
+document.getElementById("modal").style.display="none";
+
+}
+
+function saveProduct(){
+
+const name=document.getElementById("nameInput").value.trim();
+
+const price=document.getElementById("priceInput").value;
+
+const stock=document.getElementById("stockInput").value;
+
+const category=document.getElementById("categoryInput").value;
+
+if(!selectedImage || !name || !price || !stock){
+
+alert("Lengkapi semua data!");
+
+return;
+
+}
+
+if(editId){
+
+products=products.map(p=>{
+
+if(p.id===editId){
+
+return{
+...p,
+name,
+price:Number(price),
+stock:Number(stock),
+category,
+image:selectedImage
+};
+
+}
+
+return p;
+
+});
+
+}else{
+
+products.push({
+
+id:Date.now().toString(),
+
+name,
+
+price:Number(price),
+
+stock:Number(stock),
+
+category,
+
+image:selectedImage
+
+});
+
+}
+
+saveStorage();
+
+closeModal();
+
+renderProducts();
+
+}
+
+function editProduct(id){
+
+const p=products.find(x=>x.id===id);
+
+if(!p)return;
+
+editId=id;
+
+selectedImage=p.image;
+
+document.getElementById("modalTitle").innerText="Edit Produk";
+
+document.getElementById("nameInput").value=p.name;
+
+document.getElementById("priceInput").value=p.price;
+
+document.getElementById("stockInput").value=p.stock;
+
+document.getElementById("categoryInput").value=p.category;
+
+document.getElementById("preview").innerHTML=`<img src="${p.image}">`;
+
+document.getElementById("modal").style.display="flex";
+
+}
+
+function deleteProduct(id){
+
+if(confirm("Yakin ingin menghapus produk?")){
+
+products=products.filter(p=>p.id!==id);
+
+cart=cart.filter(c=>c.id!==id);
+
+saveStorage();
+
+renderProducts();
+
+renderCart();
+
+}
+
+}
+
+function addCart(id){
+
+const product=products.find(p=>p.id===id);
+
+if(!product)return;
+
+const item=cart.find(c=>c.id===id);
+
+if(item){
+
+if(item.qty<product.stock)item.qty++;
+
+}else{
+
+cart.push({
+id:product.id,
+name:product.name,
+price:product.price,
+image:product.image,
+qty:1
+});
+
+}
+
+saveStorage();
+
+renderCart();
+
+alert("Produk masuk keranjang!");
+
+}
+
+function openCart(){
+
+document.getElementById("cartPanel").classList.add("show");
+
+renderCart();
+
+}
+
+function closeCart(){
+
+document.getElementById("cartPanel").classList.remove("show");
+
+}
+
+function renderCart(){
+
+let html="";
+
+let total=0;
+let jumlah=0;
+
+if(cart.length===0){
+
+html='<div class="empty">Keranjang kosong</div>';
+
+}else{
+
+cart.forEach(c=>{
+
+total+=c.price*c.qty;
+jumlah+=c.qty;
+
+html+=`
+
+<div class="cart-item">
+
+<img src="${c.image}">
+
+<div style="flex:1">
+
+<b style="font-size:14px">${c.name}</b>
+
+<div style="color:#ee4d2d;margin:5px 0">${rupiah(c.price)}</div>
+
+<div>
+
+<button onclick="changeQty('${c.id}',-1)">➖</button>
+
+<span style="margin:0 8px">${c.qty}</span>
+
+<button onclick="changeQty('${c.id}',1)">➕</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+document.getElementById("cartItems").innerHTML=html;
+
+document.getElementById("totalPrice").innerText="Total: "+rupiah(total);
+
+document.getElementById("cartCount").innerText=jumlah;
+
+}
+
+function changeQty(id,val){
+
+const item=cart.find(c=>c.id===id);
+
+const product=products.find(p=>p.id===id);
+
+if(!item || !product)return;
+
+item.qty+=val;
+
+if(item.qty<=0){
+
+cart=cart.filter(c=>c.id!==id);
+
+}
+
+if(item.qty>product.stock)item.qty=product.stock;
+
+saveStorage();
+
+renderCart();
+
+}
+
+function checkout(){
+
+if(cart.length===0){
+
+alert("Keranjang masih kosong!");
+
+return;
+
+}
+
+alert("Checkout berhasil!\nTotal pesanan akan diproses.");
+
+cart=[];
+
+saveStorage();
+
+renderCart();
+
+closeCart();
+
+}
+
+renderProducts();
+
+renderCart();
+
+</script>
+
+</body>
+</html>
